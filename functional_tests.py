@@ -1,15 +1,27 @@
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
-options = Options()
-options.add_argument("-profile")
-options.add_argument("/home/caolv/snap/firefox/common/.cache/mozilla/firefox/45s3kzyu.default")
-browser = webdriver.Firefox(options=options)
+import unittest
 
-# 伊迪丝听说有一个很酷的在线待办事项应用
-# 她去看了这个应用的首页
-browser.get('http://localhost:8000')
-# 她注意到网页的标题和头部都包含“To-Do”这个词
-assert 'To-Do' in browser.title
+
+class NewVisitorTest(unittest.TestCase):
+    def setUp(self):
+        options = Options()
+        options.add_argument("-profile")
+        options.add_argument("/home/caolv/snap/firefox/common/.cache/mozilla/firefox/45s3kzyu.default")
+        self.browser = webdriver.Firefox(options=options)
+
+    def tearDown(self):
+        self.browser.quit()
+
+    def test_can_start_a_list_and_retrieve_it_later(self):
+        # 伊迪丝听说有一个很酷的在线待办事项应用
+        # 她去看了这个应用的首页
+        self.browser.get('http://localhost:8000')
+        # 她注意到网页的标题和头部都包含“To-Do”这个词
+        self.assertIn('To-Do', self.browser.title)
+        self.fail('Finish the test!')
+
+
 # 应用邀请她输入一个待办事项
 # 她在一个文本框中输入了“Buy peacock feathers”（购买孔雀羽毛）
 # 伊迪丝的爱好是使用假蝇做饵钓鱼
@@ -24,4 +36,6 @@ assert 'To-Do' in browser.title
 # 而且页面中有一些文字解说这个功能
 # 她访问那个URL，发现她的待办事项列表还在
 # 她很满意，去睡觉了
-browser.quit()
+
+if __name__ == '__main__':
+    unittest.main(warnings='ignore')
