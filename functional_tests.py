@@ -41,7 +41,7 @@ class NewVisitorTest(unittest.TestCase):
         
         table = self.browser.find_element(By.ID, "id_list_table")
         rows = table.find_elements(By.TAG_NAME, "tr")
-        self.assertTrue(any(row.test == "1: Buy peacock feathers" for row in rows))
+        self.assertTrue(any(row.test == "1: Buy peacock feathers" for row in rows), "New to-do item did not appear in table")
         
         # 页面中又显示了一个文本框，可以输入其他的待办事项
         # 她输入了“Use peacock feathers to make a fly”（使用孔雀羽毛做假蝇）
