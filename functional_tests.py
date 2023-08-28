@@ -21,7 +21,6 @@ class NewVisitorTest(unittest.TestCase):
         self.assertIn('To-Do', self.browser.title)
         self.fail('Finish the test!')
 
-
 # 应用邀请她输入一个待办事项
 # 她在一个文本框中输入了“Buy peacock feathers”（购买孔雀羽毛）
 # 伊迪丝的爱好是使用假蝇做饵钓鱼
