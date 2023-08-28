@@ -9,10 +9,10 @@ class NewVisitorTest(unittest.TestCase):
         options.add_argument("-profile")
         options.add_argument("/home/caolv/snap/firefox/common/.cache/mozilla/firefox/45s3kzyu.default")
         self.browser = webdriver.Firefox(options=options)
-
+    
     def tearDown(self):
         self.browser.quit()
-
+    
     def test_can_start_a_list_and_retrieve_it_later(self):
         # 伊迪丝听说有一个很酷的在线待办事项应用
         # 她去看了这个应用的首页
@@ -20,6 +20,7 @@ class NewVisitorTest(unittest.TestCase):
         # 她注意到网页的标题和头部都包含“To-Do”这个词
         self.assertIn('To-Do', self.browser.title)
         self.fail('Finish the test!')
+
 
 # 应用邀请她输入一个待办事项
 # 她在一个文本框中输入了“Buy peacock feathers”（购买孔雀羽毛）
