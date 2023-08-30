@@ -35,13 +35,21 @@ class NewVisitorTest(unittest.TestCase):
         inputbox = self.browser.find_element(By.ID, "id_new_item")
         self.assertEqual(inputbox.get_attribute("placeholder"), "Enter a to-do item")
         
-        # 她在一个文本框中输入了“Buy peacock feathers”（购买孔雀羽毛）
-        # 伊迪丝的爱好是使用假蝇做饵钓鱼
-        # inputbox.send_keys("Buy peacock feathers")
+        # She types "Buy peacock feathers" into a text box
+        # (Edith's hobby is tying fly-fishing lures)
+        inputbox.send_keys("Buy peacock feathers")
+
+        # When she hits enter, the page updates, and now the page lists
+        # "1: Buy peacock feathers" as an item in a to-do list table
+        inputbox.send_keys(Keys.ENTER)
+        time.sleep(1)
+        self.check_for_row_in_list_table("1: Buy peacock feathers")
+
+        # There is still a text box inviting her to add another item.
+        # She enters "Use peacock feathers to make a fly"
+        # (Edith is very methodical)
+        inputbox = self.browser.find_element(By.ID, "id_new_item")
         inputbox.send_keys("Use peacock feathers to make a fly")
-        
-        # 她按回车键后，页面更新了
-        # 待办事项表格中显示了“1: Buy peacock feathers”
         inputbox.send_keys(Keys.ENTER)
         time.sleep(1)
         
