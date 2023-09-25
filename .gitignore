@@ -1,8 +1,10 @@
-db.sqlite3
 geckodriver.log
-virtualenv
 __pycache__
 *.pyc
-./static
+.idea
+migrations
 functional_tests/screendumps
+db.sqlite3
+./static
+virtualenv
 
