@@ -9,6 +9,8 @@ Description=Gunicorn server for $SITENAME
 Restart=on-failure
 User=caolv
 WorkingDirectory=/home/caolv/sites/$SITENAME/source
+EnvironmentFile=/home/caolv/sites/superlists-staging.top/.env
+
 ExecStart=/home/caolv/sites/$SITENAME/virtualenv/bin/gunicorn \
     --bind unix:/tmp/$SITENAME.socket \
     superlists.wsgi:application
