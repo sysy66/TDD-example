@@ -27,14 +27,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: don't run with debug turned on in production!
 
 if "DJANGO_DEBUG_FALSE" in os.environ:
-    DEBUG = Fasle
+    DEBUG = False
     SECRET_KEY = [os.environ["DJANGO_SECRET_KEY"]]
     ALLOWED_HOSTS = [os.environ["SITENAME"], '47.111.153.131',]
 else:
     DEBUG = True
     SECRET_KEY = "insecure-key-for-dev"
     ALLOWED_HOSTS = []
-
 
 # Application definition
 
