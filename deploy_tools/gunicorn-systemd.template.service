@@ -1,0 +1,26 @@
+# $ export SITENAME=superlists-staging.top
+
+# 创建文件位置
+# /etc/systemd/system/gunicorn-superlists-staging.top.service
+
+[Unit]
+Description=Gunicorn server for $SITENAME
+[Service]
+Restart=on-failure
+User=caolv
+WorkingDirectory=/home/caolv/sites/$SITENAME/source
+ExecStart=/home/caolv/sites/$SITENAME/virtualenv/bin/gunicorn \
+    --bind unix:/tmp/$SITENAME.socket \
+    superlists.wsgi:application
+[Install]
+WantedBy=multi-user.target
+
+
+# 然后激活这个服务
+# 下面告诉Systemd，使用systemctl命令启动Gunicorn：
+# 必须执行这个命令，让Systemd加载新的配置文件
+# elspeth@server:$ sudo systemctl daemon-reload
+# 这个命令让Systemd在引导时加载服务
+# elspeth@server:$ sudo systemctl enable gunicorn-superlists-staging.ottg.eu
+# 这个命令启动服务
+# elspeth@server:$ sudo systemctl start gunicorn-superlists-staging.ottg.eu
