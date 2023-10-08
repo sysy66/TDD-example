@@ -28,7 +28,7 @@ def _get_latest_source():
     if exists(".git"):
         run(f"git fetch")
     else:
-        run(f"git clone {REPO_URL}")
+        run(f"git clone {REPO_URL} ./")
     current_commit = local("git log -n 1 --format=%H", capture=True)
     run(f"git reset --hard {current_commit}")
 
@@ -39,7 +39,7 @@ def _update_virtualenv():
         run(f"python3.10 -m venv {virtualenv_folder}")
     run(f"{virtualenv_folder}/bin/pip install -r requirements.txt "
         f"-i http://mirrors.aliyun.com/pypi/simple/ "
-        f"--trusted-host mirrors.aliyun.comt")
+        f"--trusted-host mirrors.aliyun.com")
 
 
 def _create_or_update_dotenv():
@@ -59,4 +59,5 @@ def _update_static_files():
 
 
 def _update_database():
+    run("../virtualenv/bin/python manage.py makemigrations lists")
     run("../virtualenv/bin/python manage.py migrate --noinput")

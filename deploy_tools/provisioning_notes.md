@@ -37,3 +37,21 @@
   - elspeth@server:$ sudo systemctl enable gunicorn-superlists-staging.ottg.eu
 * 这个命令启动服务
   - elspeth@server:$ sudo systemctl start gunicorn-superlists-staging.ottg.eu
+
+
+## 使用sed配置Nginx和Gunicorn
+```bash
+# 配置Nginx
+cat ./deploy_tools/nginx.template.conf | sed "s/SITENAME/superlists-staging.top/g" | sudo tee /etc/nginx/sites-available/superlists-staging.top
+
+sudo ln -s /etc/nginx/sites-available/superlists-staging.top /etc/nginx/sites-enabled/superlists-staging.top
+
+
+# 配置Gunicorn
+cat ./deploy_tools/gunicorn-systemd.template.service | sed "s/SITENAME/superlists-staging.top/g" | sudo tee /etc/systemd/system/gunicorn-superlists-staging.top.service
+
+sudo systemctl daemon-reload
+sudo systemctl reload nginx
+sudo systemctl enable gunicorn-superlists-staging.top
+sudo systemctl start gunicorn-superlists-staging.top
+```
