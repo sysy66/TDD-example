@@ -4,14 +4,14 @@
 # /etc/systemd/system/gunicorn-superlists-staging.top.service
 
 [Unit]
-Description=Gunicorn server for $SITENAME
+Description=Gunicorn server for SITENAME
 [Service]
 Restart=on-failure
 User=caolv
-WorkingDirectory=/home/caolv/sites/$SITENAME/source
-EnvironmentFile=/home/caolv/sites/superlists-staging.top/.env
+WorkingDirectory=/home/caolv/sites/SITENAME/source
+EnvironmentFile=/home/caolv/sites/SITENAME/.env
 
-ExecStart=/home/caolv/sites/$SITENAME/virtualenv/bin/gunicorn \
+ExecStart=/home/caolv/sites/SITENAME/virtualenv/bin/gunicorn \
     --bind unix:/tmp/$SITENAME.socket \
     superlists.wsgi:application
 [Install]
